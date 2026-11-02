@@ -55,14 +55,16 @@ airport records come from the data.
 
 <img src="media/sample_session.png" alt="Sample session" width="500">
 
+Additional .mkv recording can be found in the media folder with a screen recording of the execution of a sample session.
+
 ## Task 6: the shape experiment
 
 | Build order | Height | Average depth | Time for 10,000 searches | Explanation |
 |---|---|---|---|---|
 | File order | 177 | 18.3 | 1.99 ms | Original load order based on input file |
-| Sorted order | 6071 | 3035.5 | 126.60 ms | Essentially creates a linked list with 6072 nodes |
+| Sorted order | 6071 | 3035.5 | 126.60 ms | Creates a linked list with 6072 nodes, searches have to go through every previous code |
 | Balanced (middle rule) | 12 | 10.7 | 1.29 ms | Balances the nodes with a height of $log_2(6072)$ |
-| Random shuffle (bonus) | 25 | 13.8 | 1.46 ms | Random load order, approaches average of $log_2(6072)$ with a certain degree of balance |
+| Random shuffle (bonus) | 25 | 13.8 | 1.46 ms | Random load order, approaches average of $log_2(6072)$ with a certain degree of balance (significantly better than a linked list) |
 
 ## Pseudocode
 
