@@ -25,6 +25,12 @@ From the project root:
 
 ```
 g++ -std=c++17 -O2 airport_bst.cpp -o airports
+./airports
+```
+
+Automatically reading data file:
+```
+g++ -std=c++17 -O2 airport_bst.cpp -o airports
 ./airports data/airports.csv
 ```
 
