@@ -53,19 +53,16 @@ airport records come from the data.
 
 ## Sample session
 
-TODO: paste the output of a run on `data/airports.csv` (load, find BOS, find XYZ, range BOS BWI,
-remove BOS, rebalance).
+<img src="media/sample_session.png" alt="Sample session" width="500">
 
 ## Task 6: the shape experiment
 
-TODO: run `experiment` on `data/airports.csv` and copy the numbers here.
-
 | Build order | Height | Average depth | Time for 10,000 searches | Explanation |
 |---|---|---|---|---|
-| File order | | | | |
-| Sorted order | | | | |
-| Balanced (middle rule) | | | | |
-| Random shuffle (bonus) | | | | |
+| File order | 177 | 18.3 | 1.99 ms | Original load order based on input file |
+| Sorted order | 6071 | 3035.5 | 126.60 ms | Essentially creates a linked list with 6072 nodes |
+| Balanced (middle rule) | 12 | 10.7 | 1.29 ms | Balances the nodes with a height of $log_2(6072)$ |
+| Random shuffle (bonus) | 25 | 13.8 | 1.46 ms | Random load order, approaches average of $log_2(6072)$ with a certain degree of balance |
 
 ## Pseudocode
 
