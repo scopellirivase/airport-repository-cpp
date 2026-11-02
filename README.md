@@ -1,0 +1,77 @@
+# airport-bst-cpp
+
+An airport lookup service built on my own binary search tree, keyed by the three-letter IATA code
+(BOS, JFK, DAC). It loads the OpenFlights airport list, then supports search, insert, delete,
+alphabetical listing, range queries, and a study of how insertion order changes the tree's height.
+
+## Project layout
+
+```
+airport-bst-cpp/
+├── airport_bst.cpp        the whole program (Airport and AirportBST classes, commands, tests)
+├── data/
+│   └── airports.csv       OpenFlights airport data
+├── docs/
+│   └── pseudocode.md      pseudocode for every operation
+└── README.md
+```
+
+## Build and run
+
+From the project root:
+
+```
+g++ -std=c++17 -O2 airport_bst.cpp -o airports
+./airports data/airports.csv
+```
+
+The file given on the command line is loaded at startup. You can also start `./airports` with no
+argument and type `load data/airports.csv`.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `load FILE` | Loads `airports.csv` and builds the tree in file order. Given a file written by `save`, rebuilds the tree from it instead. |
+| `find CODE` | Prints the airport, the search path and the number of comparisons. |
+| `minmax` | Prints the smallest and largest code. |
+| `remove CODE` | Deletes an airport and reports the case (D1, D2 or D3). |
+| `add CODE name\|city\|country` | Adds an airport. |
+| `list [N]` | Alphabetical listing (inorder), with a sorted check. |
+| `save FILE` | Writes the codes in preorder. |
+| `validate` | Checks the BST property. |
+| `range FROM TO` | Lists the airports from FROM to TO and the number of nodes visited. |
+| `stats` | Prints the height and average depth. |
+| `rebalance` | Rebuilds the tree balanced from the sorted array. |
+| `experiment` | Prints the Task 6 table. |
+| `test` | Runs the Task 2-5 walkthrough: every search case, every delete case, add and remove QQQ, sorted listing, save and reload, and `range BOS BWI`. |
+| `quit` | Exits. |
+
+A file written by `save` starts with a `#preorder` line, which is how `load` tells it apart from
+the airport data. Load `data/airports.csv` first, because the saved file holds only codes and the
+airport records come from the data.
+
+## Sample session
+
+TODO: paste the output of a run on `data/airports.csv` (load, find BOS, find XYZ, range BOS BWI,
+remove BOS, rebalance).
+
+## Task 6: the shape experiment
+
+TODO: run `experiment` on `data/airports.csv` and copy the numbers here.
+
+| Build order | Height | Average depth | Time for 10,000 searches | Explanation |
+|---|---|---|---|---|
+| File order | | | | |
+| Sorted order | | | | |
+| Balanced (middle rule) | | | | |
+| Random shuffle (bonus) | | | | |
+
+## Pseudocode
+
+See [docs/pseudocode.md](docs/pseudocode.md) for build, insert, search, delete, validate, range and
+the balanced build.
+
+## Data credit
+
+Airport data from OpenFlights.org (https://openflights.org/data.php), published under the Open Database License.
