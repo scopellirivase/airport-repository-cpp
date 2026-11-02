@@ -442,7 +442,7 @@ class AirportBST {
 };
 
 // ---------------------------------------------------------------------------
-// 6: the shape experiment
+// 6: shape experiment
 // ---------------------------------------------------------------------------
 void timeRow(string label, AirportBST& tree, const vector<string>& queries) {
     int found = 0;

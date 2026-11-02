@@ -8,20 +8,20 @@ Insert, search and delete are iterative; the other tree functions are recursive
 ## Task 1: load and build
 
 ```
-LOAD(file):                                   // data/airports.csv
+LOAD(file):
     records <- empty array;  skipped <- 0
     for each line of file:
-        cells <- SPLIT-CSV(line)              // a comma inside "quotes" does not split
+        cells <- SPLIT-CSV(line)
         if cells has fewer than 8 fields or cells[4] is not 3 characters (\N):
             skipped <- skipped + 1
         else
-            append Airport(cells) to records  // also stored in a code -> record table
+            append Airport(cells) to records
 
 SPLIT-CSV(line):
     insideQuotes <- false;  cell <- ""
     for each character ch of line:
         if ch = '"':
-            if insideQuotes and next character = '"': add '"' to cell, skip it   // escaped quote
+            if insideQuotes and next character = '"': add '"' to cell, skip it
             else insideQuotes <- not insideQuotes
         else if ch = ',' and not insideQuotes:
             output cell;  cell <- ""
@@ -30,7 +30,7 @@ SPLIT-CSV(line):
 
 BUILD():
     root <- NULL
-    for i <- 0 to n - 1:                      // file order
+    for i <- 0 to n - 1:
         if INSERT(records[i]) fails: report duplicate (rule I4: not inserted, counted)
     report the number of insertions, HEIGHT and AVERAGE-DEPTH
 ```
@@ -41,7 +41,7 @@ BUILD():
 INSERT(a):
     parent <- NULL;  cur <- root
     while cur != NULL:
-        if a.key = cur.key: return false      // duplicate, nothing inserted
+        if a.key = cur.key: return false
         parent <- cur
         if a.key < cur.key: cur <- cur.left
         else                cur <- cur.right
@@ -62,7 +62,7 @@ FIND(code):
         if code < cur.key: cur <- cur.left
         else               cur <- cur.right
     if cur != NULL: add cur.key to the path
-    return cur                                // NULL = not found
+    return cur
     // comparisons = number of codes in the path
 
 MIN():  cur <- root;  while cur.left  != NULL: cur <- cur.left;   return cur
@@ -80,20 +80,20 @@ REMOVE(code):
         else               cur <- cur.right
     if cur = NULL: return false
 
-    if cur has no children:                   // D1: leaf
+    if cur has no children:
         nothing to do, cur is removed below
-    else if cur has only a left child:        // D2
+    else if cur has only a left child:
         nothing to do, cur is removed below
-    else if cur has only a right child:       // D2
+    else if cur has only a right child:
         nothing to do, cur is removed below
-    else:                                     // D3: two children
+    else:
         succParent <- cur;  succ <- cur.right
-        while succ.left != NULL:              // successor = leftmost node of the right subtree
+        while succ.left != NULL:
             succParent <- succ;  succ <- succ.left
-        copy the data of succ into cur        // keys, name, city, ... (not the child pointers)
-        parent <- succParent;  cur <- succ    // now remove succ instead; it has no left child
+        copy the data of succ into cur
+        parent <- succParent;  cur <- succ
 
-    child <- cur.left if cur.left != NULL, else cur.right      // at most one child
+    child <- cur.left if cur.left != NULL, else cur.right
     if parent = NULL:        root <- child
     else if parent.left = cur: parent.left <- child
     else                       parent.right <- child
@@ -102,7 +102,7 @@ REMOVE(code):
 ```
 
 ```
-FIND-EXAMPLE(kind):             // used by the tests to pick one node of each delete case
+FIND-EXAMPLE(kind):
     q <- the children of the root
     for each node n in q, in order (level order):
         if n matches kind (leaf / only left / only right / two children): return n.key
@@ -113,7 +113,7 @@ FIND-EXAMPLE(kind):             // used by the tests to pick one node of each de
 ## Task 4: traversals, validation, save and load
 
 ```
-INORDER(n):   if n = NULL return;  INORDER(n.left);  visit n;  INORDER(n.right)    // sorted order
+INORDER(n):   if n = NULL return;  INORDER(n.left);  visit n;  INORDER(n.right)
 PREORDER(n):  if n = NULL return;  visit n;  PREORDER(n.left);  PREORDER(n.right)
 
 LEVEL-ORDER():
@@ -121,7 +121,7 @@ LEVEL-ORDER():
     for i <- 0 while i < |q|:
         output q[i].key;  append q[i].left and q[i].right if they exist
 
-VALIDATE(n, lo, hi):                          // start with VALIDATE(root, none, none)
+VALIDATE(n, lo, hi):
     if n = NULL: return true
     if lo exists and n.key <= lo: return false
     if hi exists and n.key >= hi: return false
@@ -131,7 +131,6 @@ SAVE(file):  write the line "#preorder", then the PREORDER codes, one per line
 LOAD-TREE(file):
     clear the tree
     for each code in the file, in order: INSERT(the stored record of that code)
-    // inserting a preorder list in order gives back the same shape
 ```
 
 `load FILE` looks at the first character of the file: `#` means a saved preorder
@@ -142,7 +141,7 @@ list, anything else is airport data.
 ```
 HEIGHT(n):    if n = NULL return -1;  return 1 + max(HEIGHT(n.left), HEIGHT(n.right))
 SUM-DEPTHS(n, d):  if n = NULL return 0;  return d + SUM-DEPTHS(n.left, d+1) + SUM-DEPTHS(n.right, d+1)
-AVERAGE-DEPTH():   SUM-DEPTHS(root, 0) / number of nodes          // the root has depth 0
+AVERAGE-DEPTH():   SUM-DEPTHS(root, 0) / number of nodes
 
 PRINT-TOP-LEVELS(k):
     cur <- [root]
@@ -159,9 +158,9 @@ RANGE(from, to):
     visit(n):
         if n = NULL: return
         count n as visited
-        if from < n.key: visit(n.left)        // otherwise the left subtree is all < from
+        if from < n.key: visit(n.left)
         if from <= n.key <= to: output n
-        if n.key < to:   visit(n.right)       // otherwise the right subtree is all > to
+        if n.key < to:   visit(n.right)
     visit(root)
     return the number of visited nodes
 ```
@@ -169,13 +168,13 @@ RANGE(from, to):
 ## Task 6: balanced build and the experiment
 
 ```
-BUILD-BALANCED(a, lo, hi):                    // a is sorted with no duplicates
+BUILD-BALANCED(a, lo, hi):
     if lo > hi: return NULL
     mid <- (lo + hi) / 2
     node <- new Airport copied from a[mid]
     node.left  <- BUILD-BALANCED(a, lo, mid - 1)
     node.right <- BUILD-BALANCED(a, mid + 1, hi)
-    return node                               // height = floor(log2 n)
+    return node
 
 REBALANCE():
     a <- INORDER() copied into an array
