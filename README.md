@@ -23,6 +23,7 @@ airport-bst-cpp/
 
 From the project root:
 
+Start program without reading data file:
 ```
 g++ -std=c++17 -O2 airport_bst.cpp -o airports
 ./airports
@@ -33,9 +34,6 @@ Automatically reading data file:
 g++ -std=c++17 -O2 airport_bst.cpp -o airports
 ./airports data/airports.csv
 ```
-
-The file given on the command line is loaded at startup. You can also start `./airports` with no
-argument and type `load data/airports.csv`.
 
 ## Commands
 
