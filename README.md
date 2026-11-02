@@ -13,6 +13,9 @@ airport-bst-cpp/
 │   └── airports.csv       OpenFlights airport data
 ├── docs/
 │   └── pseudocode.md      pseudocode for every operation
+├── media/
+│   └── sample_session.mkv screen recording of a session execution
+│   └── sample_session.png screenshot of a session execution
 └── README.md
 ```
 
