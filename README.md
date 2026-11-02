@@ -8,14 +8,14 @@ alphabetical listing, range queries, and a study of how insertion order changes 
 
 ```
 airport-bst-cpp/
-├── airport_bst.cpp        the whole program (Airport and AirportBST classes, commands, tests)
+├── airport_bst.cpp          the whole program (Airport and AirportBST classes, commands, tests)
 ├── data/
-│   └── airports.csv       OpenFlights airport data
+│   └── airports.csv         OpenFlights airport data
 ├── docs/
-│   └── pseudocode.md      pseudocode for every operation
+│   └── pseudocode.md        pseudocode for every operation
 ├── media/
-│   └── sample_session.mkv screen recording of a session execution
-│   └── sample_session.png screenshot of a session execution
+│   └── sample_session.mkv   screen recording of a session execution
+│   └── sample_session.png   screenshot of a session execution
 └── README.md
 ```
 
